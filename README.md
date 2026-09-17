@@ -22,7 +22,21 @@ after the reaction, not the technique: 说人话, 缩成三句, 给我步骤, �
 
 ## Install
 
-    dsh plugin --profile web add github:ciceroyang/dsh-followup-actions#v0.1.0
+    dsh plugin --profile web add github:ciceroyang/dsh-followup-actions#v0.1.1
+
+One command installs the package and mounts it: the manifest declares `dsh.bundle`, so the
+profile adds the package to its loader tree, and the browser half is served from
+`exports["./client"]`.
+
+From a local checkout instead, mount it by hand:
+
+    ln -sfn "$PWD/dsh-followup-actions" ~/.dsh/profiles/web/node_modules/dsh-followup-actions
+    # then in ~/.dsh/profiles/web/cordis.patch.yml
+    - insert:
+        - id: followup-actions
+          name: dsh-followup-actions
+
+The web profile reloads the patch live; refresh the page afterwards.
 
 ## Notes
 
